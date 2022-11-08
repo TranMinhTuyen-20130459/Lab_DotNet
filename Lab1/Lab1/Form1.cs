@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Lab1
@@ -159,6 +160,7 @@ namespace Lab1
             this.ckbUnderlined.TabIndex = 2;
             this.ckbUnderlined.Text = "Gạch Chân ";
             this.ckbUnderlined.UseVisualStyleBackColor = true;
+            this.ckbUnderlined.CheckStateChanged += new System.EventHandler(this.grbFont_Changed);
             // 
             // ckbItalic
             // 
@@ -170,6 +172,7 @@ namespace Lab1
             this.ckbItalic.TabIndex = 1;
             this.ckbItalic.Text = "Nghiêng Italic";
             this.ckbItalic.UseVisualStyleBackColor = true;
+            this.ckbItalic.CheckStateChanged += new System.EventHandler(this.grbFont_Changed);
             // 
             // ckbBold
             // 
@@ -181,10 +184,11 @@ namespace Lab1
             this.ckbBold.TabIndex = 0;
             this.ckbBold.Text = "Đậm Bold";
             this.ckbBold.UseVisualStyleBackColor = true;
-            this.ckbBold.Click += new System.EventHandler(this.grbFont_Changed);
+            this.ckbBold.CheckStateChanged += new System.EventHandler(this.grbFont_Changed);
             // 
             // text_OutputName
             // 
+            this.text_OutputName.ForeColor = System.Drawing.Color.Black;
             this.text_OutputName.Location = new System.Drawing.Point(143, 391);
             this.text_OutputName.Name = "text_OutputName";
             this.text_OutputName.Size = new System.Drawing.Size(259, 26);
@@ -241,18 +245,55 @@ namespace Lab1
         private void textInputName_Changed(object sender, EventArgs e)
         {
             string text = this.text_InputName.Text;
-            
+            grbColor_Changed(sender, e);
+            grbColor_Changed(sender, e);
+            this.text_OutputName.Text = text;
+
+
+
 
         }
 
         private void grbColor_Changed(object sender, EventArgs e)
         {
 
+            if (radRed.Checked == true)
+            {
+                this.text_OutputName.ForeColor = System.Drawing.Color.Red;
+            }
+            if (radBlue.Checked == true)
+            {
+                this.text_OutputName.ForeColor = System.Drawing.Color.Blue;
+            }
+            if (radGreen.Checked == true)
+            {
+                this.text_OutputName.ForeColor = System.Drawing.Color.Green;
+            }
+            if (radBlack.Checked == true)
+            {
+                this.text_OutputName.ForeColor = System.Drawing.Color.Black;
+            }
+
         }
 
         private void grbFont_Changed(object sender, EventArgs e)
         {
+            Font SelectedText_Font = this.text_OutputName.Font;
+            if (ckbBold.CheckState == CheckState.Checked)
+            {
+                this.text_OutputName.Font = new Font(SelectedText_Font, SelectedText_Font.Style ^ FontStyle.Bold);
 
+            }
+
+            if (ckbItalic.CheckState == CheckState.Checked)
+            {
+                this.text_OutputName.Font = new Font(SelectedText_Font, SelectedText_Font.Style ^ FontStyle.Italic);
+            }
+
+            if (ckbUnderlined.CheckState == CheckState.Checked)
+            {
+                this.text_OutputName.Font = new Font(SelectedText_Font, SelectedText_Font.Style ^ FontStyle.Underline);
+            }
         }
 
         private void bt_Cancel_Event(object sender, EventArgs e)
@@ -266,8 +307,10 @@ namespace Lab1
             {
                 // cancel
             }
+        }
 
-
+        private void Lab1_Load(object sender, EventArgs e)
+        {
 
         }
     }
