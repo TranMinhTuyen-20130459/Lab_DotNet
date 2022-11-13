@@ -248,10 +248,6 @@ namespace Lab1
             grbColor_Changed(sender, e);
             grbColor_Changed(sender, e);
             this.text_OutputName.Text = text;
-
-
-
-
         }
 
         private void grbColor_Changed(object sender, EventArgs e)
